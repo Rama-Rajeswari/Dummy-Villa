@@ -220,6 +220,15 @@ namespace MagicVilla_VillaAPI.Controller
             // }
             return _response;
         }
+
+
+        
+          // This is a test comment to trigger the CI/CD pipeline
+           public string TestMethod()
+          {
+               return "Hello, CI/CD!";
+          }
+
  
     }
 }
