@@ -1,0 +1,123 @@
+@* @using MagicVilla_Web.Models.Dto
+@model List<VillaDTO>
+
+<h2 class="text-primary">Search Villas</h2>
+
+<form asp-action="Search" method="get">
+    <input type="text" name="query" class="form-control" placeholder="Search by villa, room, or destination..." />
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row mt-4">
+        @foreach (var villa in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <img src="@villa.ImageUrl" class="card-img-top" alt="@villa.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@villa.Name</h5>
+                        <p class="card-text">@villa.Details</p>
+                        <a asp-controller="Villa" asp-action="Details" asp-route-id="@villa.Id" class="btn btn-success">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model != null)
+{
+    <div class="alert alert-warning mt-4">No villas found for this search.</div>
+}
+
+
+ *@
+
+
+
+
+
+@* @using MagicVilla_Web.Models.Dto
+@model List<VillaDTO>
+
+<h2 class="text-primary">Search Villas</h2>
+
+<form asp-action="Search" method="get">
+    <input type="text" name="query" class="form-control" placeholder="Search by villa, room, or destination..." />
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row mt-4">
+        @foreach (var villa in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <img src="@villa.ImageUrl" class="card-img-top" alt="@villa.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@villa.Name</h5>
+                        <p class="card-text">@villa.Details</p>
+
+                        <div class="mb-3">
+                            <div><strong>Occupancy:</strong> @villa.Occupancy adults</div>
+                            <div><strong>Villa Size:</strong> @villa.Sqft sqft</div>
+                        </div>
+
+                        <a asp-controller="Villa" asp-action="Details" asp-route-id="@villa.Id" class="btn btn-success">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model != null)
+{
+    <div class="alert alert-warning mt-4">No villas found for this search.</div>
+} *@
+
+
+
+
+@using MagicVilla_Web.Models.Dto
+@model List<VillaDTO>
+
+<h2 class="text-primary">Search Villas</h2>
+
+<!-- Updated container with left alignment -->
+<div class="search-container" style="max-width: 300px; margin-bottom: 20px;">
+    <form asp-action="Search" method="get">
+        <input type="text" name="query" class="form-control" placeholder="Search by villa, room, or destination..." />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+</div>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row mt-4">
+        @foreach (var villa in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card shadow">
+                    <img src="@villa.ImageUrl" class="card-img-top" alt="@villa.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@villa.Name</h5>
+                        <p class="card-text">@villa.Details</p>
+
+                        <div class="mb-3">
+                            <div><strong>Occupancy:</strong> @villa.Occupancy adults</div>
+                            <div><strong>Villa Size:</strong> @villa.Sqft sqft</div>
+                        </div>
+
+                        <a asp-controller="Villa" asp-action="Details" asp-route-id="@villa.Id" class="btn btn-success">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else if (Model != null)
+{
+    <div class="alert alert-warning mt-4">No villas found for this search.</div>
+}

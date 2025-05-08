@@ -1,0 +1,56 @@
+
+@model MagicVilla_Web.Models.Dto.GuestTypeDTO
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this guest type?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form asp-action="DeleteGuestType" asp-controller="GuestType" asp-route-id="@Model.Id" method="post">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container border p-3">
+    <h1 class="text-primary">Delete Guest Type</h1>
+    <hr />
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-2">
+            <label asp-for="Name" class="control-label pt-2" style="font-size: 20px;"></label>
+        </div>
+        <div class="col-10 pb-3">
+            <input asp-for="Name" disabled class="form-control" />
+        </div>
+
+        <div class="col-5 offset-2">
+            <a asp-action="IndexGuestType" asp-controller="GuestType" class="btn btn-primary form-control">Back to List</a>
+        </div>
+        <div class="col-5">
+            <button type="button" class="btn btn-danger form-control" data-toggle="modal" data-target="#deleteModal">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}

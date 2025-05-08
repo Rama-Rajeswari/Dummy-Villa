@@ -1,0 +1,3 @@
+C:\Users\SUNRAJES\Desktop\VillaAPI\publish\MagicVilla_Utility.dll
+C:\Users\SUNRAJES\Desktop\VillaAPI\publish\MagicVilla_Utility.deps.json
+C:\Users\SUNRAJES\Desktop\VillaAPI\publish\MagicVilla_Utility.pdb

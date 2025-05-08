@@ -1,0 +1,7 @@
+{
+    "dotnet.defaultSolution": "MagicVilla_VillaAPI.sln",
+     "dotnet.testExplorer.enableTelemetryForEditor": true,
+      "dotnet.testExplorer.testProjectPath": "**/test/*.csproj",
+       "dotnet-test-explorer.testProjectPath": "MagicVilla_NUnit"
+    
+}

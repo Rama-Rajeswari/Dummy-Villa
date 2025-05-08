@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build VillaAPI",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["build", "${workspaceFolder}/MagicVilla_VillaAPI"],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "build VillaWeb",
+            "type": "process",
+            "command": "dotnet",
+            "args": ["build", "${workspaceFolder}/MagicVilla_Web"],
+            "problemMatcher": "$msCompile",
+            "group": "build"
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "dotnet",
+            "args": ["build"],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "dependsOn": ["build VillaAPI", "build VillaWeb"]
+        }
+    ]
+}

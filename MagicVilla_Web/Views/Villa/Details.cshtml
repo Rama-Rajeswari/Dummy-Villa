@@ -1,0 +1,73 @@
+@using MagicVilla_Web.Models.Dto
+@model VillaDetailsViewModel
+
+<div class="container mt-4">
+    <h2 class="text-warning">@Model.Villa.Name - Room Details</h2>
+    <hr />
+
+    
+    <h4 class="text-primary">Facilities Available</h4>
+    <ul class="list-group mb-4">
+        @if (Model.Facilities != null && Model.Facilities.Any())
+        {
+            @foreach (var facility in Model.Facilities)
+            {
+                <li class="list-group-item">@facility.Name</li>
+            }
+        }
+        else
+        {
+            <li class="list-group-item">No facilities available</li>
+        }
+    </ul>
+
+    @if (Model.Rooms != null && Model.Rooms.Any())
+    {
+        @foreach (var room in Model.Rooms)
+        {
+            <div class="row mb-4">
+                
+                <div class="col-md-6">
+                    <h4 class="text-secondary">Room Information</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Villa:</strong> @Model.Villa.Name</li>
+                        <li class="list-group-item"><strong>Room Type:</strong> @room.RoomType</li>
+                        <li class="list-group-item"><strong>Max Guests:</strong> @room.MaxGuests</li>
+                        <li class="list-group-item"><strong>Guest Type:</strong> 
+                            @(room.GuestTypes != null && room.GuestTypes.Any()
+                                ? string.Join(", ", room.GuestTypes.Select(g => g.Name))
+                                : "No Guest Type Available")
+                        </li>
+                    </ul>
+                </div>
+
+                
+                <div class="col-md-6">
+                    <h4 class="text-secondary">Pricing</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Weekday Price:</strong> @room.WeekdayPrice.ToString("C")</li>
+                        <li class="list-group-item"><strong>Weekend Price:</strong> @room.WeekendPrice.ToString("C")</li>
+                    </ul>
+                </div>
+            </div>
+
+            
+            <div class="text-center mb-4">
+                <a asp-controller="Booking" asp-action="Create"
+                   asp-route-villaId="@Model.Villa.Id"
+                   asp-route-roomId="@room.Id"
+                   asp-route-roomType="@room.RoomType"
+                   asp-route-villaName="@Model.Villa.Name"
+                   class="btn btn-success btn-lg">
+                    Book This Room
+                </a>
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+        <p class="text-danger">No rooms available for this villa.</p>
+    }
+</div>
+

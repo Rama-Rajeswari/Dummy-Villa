@@ -1,0 +1,11 @@
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\bin\Release\net9.0\MagicVilla_Utility.deps.json
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\bin\Release\net9.0\MagicVilla_Utility.dll
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\bin\Release\net9.0\MagicVilla_Utility.pdb
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.AssemblyInfoInputs.cache
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.AssemblyInfo.cs
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.csproj.CoreCompileInputs.cache
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.dll
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\refint\MagicVilla_Utility.dll
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\MagicVilla_Utility.pdb
+C:\Users\SUNRAJES\Desktop\VillaAPI\MagicVilla_Utility\obj\Release\net9.0\ref\MagicVilla_Utility.dll

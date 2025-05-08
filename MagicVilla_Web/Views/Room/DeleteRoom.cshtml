@@ -1,0 +1,84 @@
+
+@model MagicVilla_Web.Models.Dto.RoomDTO
+
+<form asp-action="DeleteRoom" id="deleteRoomForm">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Delete Room</h1>
+        <hr />
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="RoomType" class="control-label pt-2" style="font-size: 20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="RoomType" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label asp-for="MaxGuests" class="control-label pt-2" style="font-size: 20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="MaxGuests" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label class="control-label pt-2" style="font-size: 20px;">Guest Types</label>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="WeekdayPrice" class="control-label pt-2" style="font-size: 20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="WeekdayPrice" disabled class="form-control" />
+            </div>
+            <div class="col-2">
+                <label asp-for="WeekendPrice" class="control-label pt-2" style="font-size: 20px;"></label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="WeekendPrice" disabled class="form-control" />
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexRoom" asp-controller="Room" class="btn btn-primary form-control">Back to List</a>
+            </div>
+            <div class="col-5">
+                <button type="button" class="btn btn-danger form-control" onclick="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete this room?")) {
+                document.getElementById("deleteRoomForm").submit();
+            }
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

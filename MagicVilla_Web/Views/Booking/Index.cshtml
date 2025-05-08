@@ -1,0 +1,34 @@
+@* @model List<MagicVilla_Web.Models.Dto.BookingDTO>
+
+<h2>Bookings</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Villa Name</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>MobileNumber</th>
+            <th>CheckIn</th>
+            <th>CheckOut</th>
+            <th>NumberOfGuests</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr>
+                <td>@booking.VillaId</td>
+                <td>@booking.Name</td>
+                <td>@booking.Email</td>
+                <td>@booking.MobileNumber</td>
+                <td>@booking.CheckIn.ToShortDateString()</td>
+                <td>@booking.CheckOut.ToShortDateString()</td>
+                
+                <td>
+                    <a asp-action="Delete" asp-route-id="@booking.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> *@

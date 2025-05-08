@@ -1,0 +1,1022 @@
+@using MagicVilla_Web.Models.Dto
+@* 
+@{
+    ViewData["Title"] = "Book a Room";
+}
+
+<h2 class="text-primary text-center mb-3">Book a Room</h2>
+<hr />
+
+<div class="booking-container mx-auto">
+    <form id="bookingForm" asp-action="Create" method="post" class="needs-validation" novalidate>
+        <input type="hidden" id="VillaId" name="VillaId" value="@ViewBag.VillaId" />
+        <input type="hidden" id="RoomId" name="RoomId" value="@ViewBag.RoomId" />
+        <input type="hidden" id="MaxGuests" name="MaxGuests" value="@ViewBag.MaxGuests" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="VillaName">Villa Name</label>
+                    <input type="text" id="VillaName" name="VillaName" class="form-control" value="@ViewBag.VillaName" readonly />
+                </div>
+
+    using MagicVilla_Web.Models.Dto;
+                <div class="form-group">
+                    <label for="RoomType">Room Type</label>
+                    <input type="text" id="RoomType" name="RoomType" class="form-control" value="@ViewBag.RoomName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" id="FullName" name="Name" class="form-control" required minlength="3" />
+                    <div class="invalid-feedback">Enter at least 3 characters.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="MobileNumber">Mobile Number</label>
+                    <input type="tel" id="MobileNumber" name="MobileNumber" class="form-control" required pattern="^\d{10}$" />
+                    <div class="invalid-feedback">Enter a valid 10-digit number.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" required />
+                    <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="CheckIn">Check-In Date</label>
+                    <input type="date" id="CheckIn" name="CheckIn" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-in date.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="CheckOut">Check-Out Date</label>
+                    <input type="date" id="CheckOut" name="CheckOut" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-out date.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Adults">Adults</label>
+                    <input type="number" id="Adults" name="Adults" class="form-control" min="1" max="10" required />
+                    <div class="invalid-feedback">Minimum 1 adult required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Children">Children</label>
+                    <input type="number" id="Children" name="Children" class="form-control" min="0" max="10" required />
+                    <div class="invalid-feedback">Cannot be negative.</div>
+                </div>
+
+                <p id="guestError" style="color: red; display: none;"></p> <!-- Error Message -->
+
+                <button type="submit" class="btn btn-book">Book Now</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var today = new Date().toISOString().split('T')[0];
+        $("#CheckIn").attr("min", today);
+        $("#CheckOut").attr("min", today);
+
+        $("#CheckIn").on("change", function () {
+            var checkInDate = $(this).val();
+            $("#CheckOut").attr("min", checkInDate);
+        });
+        $("#bookingForm").on("submit", function (event) {
+            var maxGuests = parseInt($("#MaxGuests").val()); 
+            var adults = parseInt($("#Adults").val()) || 0;
+            var children = parseInt($("#Children").val()) || 0;
+            var totalGuests = adults + children;
+            var errorMessage = $("#guestError");
+
+            if (totalGuests > maxGuests) {
+                event.preventDefault();
+                event.stopPropagation();
+                errorMessage.text("This room can accommodate a maximum of " + maxGuests + " guests only.");
+                errorMessage.show();
+                return false;
+            } else {
+                errorMessage.hide();
+            }
+
+            if (!this.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            $(this).addClass("was-validated");
+        });
+
+        $("input").on("input blur", function () {
+            if (this.checkValidity()) {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            } else {
+                $(this).removeClass("is-valid").addClass("is-invalid");
+            }
+        });
+    });
+</script>
+<style>
+    .booking-container {
+        max-width: 600px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .btn-book {
+        width: 100%;
+        background: linear-gradient(to right, #76b852, #8DC26F);
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+
+    .btn-book:hover {
+        background: linear-gradient(to right, #5a8c3f, #76b852);
+    }
+
+    .was-validated .form-control:invalid {
+        border-color: red;
+    }
+
+    .text-primary {
+        font-weight: bold;
+    }
+</style> *@
+
+
+
+
+
+
+
+
+
+
+@* @{
+    ViewData["Title"] = "Book a Room";
+}
+
+<h2 class="text-primary text-center mb-3">Book a Room</h2>
+<hr />
+
+<div class="booking-container mx-auto">
+    <form id="bookingForm" asp-action="Create" method="post" class="needs-validation" novalidate>
+        <input type="hidden" id="VillaId" name="VillaId" value="@Model.VillaId" />
+        <input type="hidden" id="RoomId" name="RoomId" value="@Model.RoomId" />
+        <input type="hidden" id="MaxGuests" name="MaxGuests" value="@Model.MaxGuests" />
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="VillaName">Villa Name</label>
+                    <input type="text" id="VillaName" name="VillaName" class="form-control" value="@Model.VillaName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="RoomType">Room Type</label>
+                    <input type="text" id="RoomType" name="RoomType" class="form-control" value="@Model.RoomName" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" id="FullName" name="Name" class="form-control" required minlength="3" />
+                    <div class="invalid-feedback">Enter at least 3 characters.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="MobileNumber">Mobile Number</label>
+                    <input type="tel" id="MobileNumber" name="MobileNumber" class="form-control" required pattern="^\d{10}$" />
+                    <div class="invalid-feedback">Enter a valid 10-digit number.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" required />
+                    <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="CheckIn">Check-In Date</label>
+                    <input type="date" id="CheckIn" name="CheckIn" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-in date.</div>
+                    <p id="checkInError" class="text-danger" style="display: none;"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="CheckOut">Check-Out Date</label>
+                    <input type="date" id="CheckOut" name="CheckOut" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-out date.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Adults">Adults</label>
+                    <input type="number" id="Adults" name="Adults" class="form-control" min="1" required />
+                    <div class="invalid-feedback">Minimum 1 adult required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Children">Children (Optional)</label>
+                    <input type="number" id="Children" name="Children" class="form-control" min="0" />
+                </div>
+
+                <p id="guestError" class="text-danger" style="display: none;"></p>
+
+                <button type="submit" class="btn btn-book">Book Now</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Include Flatpickr -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+    var roomId = $("#RoomId").val();
+    var bookedDates = [];
+
+    // Fetch booked dates from API
+    $.ajax({
+        url: `http://localhost:5217/api/v1/BookingAPI/GetBookedDates/${roomId}`,
+        method: "GET",
+        success: function (data) {
+            console.log("Raw Booked Dates from API:", data);
+
+            // Ensure dates are in 'YYYY-MM-DD' format for Flatpickr
+            bookedDates = data.map(date => new Date(date).toISOString().split('T')[0]); 
+
+            console.log("Processed Booked Dates:", bookedDates); // Debugging
+            initializeDatepickers();
+        },
+        error: function () {
+            console.log("Error fetching booked dates.");
+            initializeDatepickers();
+        }
+    });
+
+    function initializeDatepickers() {
+        var today = new Date().toISOString().split('T')[0];
+
+        $("#CheckIn").flatpickr({
+            dateFormat: "Y-m-d",
+            minDate: today,
+            disable: bookedDates,
+            allowInput: false,
+            onChange: function (selectedDates) {
+                if (selectedDates.length > 0) {
+                    var checkInDate = selectedDates[0].toISOString().split('T')[0];
+
+                    if (bookedDates.includes(checkInDate)) {
+                        $("#checkInError").text("This room is already booked for this date. Please choose another date.").show();
+                        $("#CheckIn").val("");  
+                        return;
+                    } else {
+                        $("#checkInError").hide();
+                    }
+
+                    $("#CheckOut").flatpickr({
+                        dateFormat: "Y-m-d",
+                        minDate: checkInDate,
+                        disable: bookedDates, // Ensure checkout dates also block booked dates
+                        allowInput: false
+                    });
+                }
+            }
+        });
+
+        $("#CheckOut").flatpickr({
+            dateFormat: "Y-m-d",
+            minDate: today,
+            disable: bookedDates,
+            allowInput: false
+        });
+    }
+});
+
+
+        $("#bookingForm").on("submit", function (event) {
+            var maxGuests = parseInt($("#MaxGuests").val());
+            var adults = parseInt($("#Adults").val()) || 0;
+            var children = parseInt($("#Children").val()) || 0;
+            var totalGuests = adults + children;
+            var errorMessage = $("#guestError");
+
+            if (totalGuests > maxGuests) {
+                event.preventDefault();
+                errorMessage.text("This room can accommodate a maximum of " + maxGuests + " guests only.").show();
+                return false;
+            } else {
+                errorMessage.hide();
+            }
+
+            if (!this.checkValidity()) {
+                event.preventDefault();
+            }
+            $(this).addClass("was-validated");
+        });
+
+        $("input").on("input blur", function () {
+            if (this.checkValidity()) {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            } else {
+                $(this).removeClass("is-valid").addClass("is-invalid");
+            }
+        });
+    });
+</script>
+
+<style>
+    .booking-container {
+        max-width: 600px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        height: 38px;
+        font-size: 14px;
+    }
+
+    .btn-book {
+        width: 100%;
+        background: linear-gradient(to right, #76b852, #8DC26F);
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 15px;
+    }
+
+    .btn-book:hover {
+        background: linear-gradient(to right, #5a8c3f, #76b852);
+    }
+</style> *@
+
+
+
+
+
+
+
+@model BookingDTO
+@{
+    ViewData["Title"] = "Book a Room";
+}
+<h2 class="text-primary text-center mb-3">Book a Room</h2>
+<hr />
+
+<div class="booking-container mx-auto">
+    <form id="bookingForm" asp-action="Create" method="post" class="needs-validation" novalidate>
+        <input type="hidden" id="VillaId" name="VillaId" value="@Model.VillaId" />
+        <input type="hidden" id="RoomId" name="RoomId" value="@Model.RoomId" />
+        <input type="hidden" id="MaxGuests" name="MaxGuests" value="@Model.MaxGuests" />
+
+        <!-- LEFT PANEL -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Villa Name</label>
+                    <input type="text" class="form-control" value="@Model.VillaName" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <input type="text" class="form-control" value="@Model.RoomName" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" id="FullName" name="Name" class="form-control" required minlength="3" />
+                    <div class="invalid-feedback">Enter at least 3 characters.</div>
+                </div>
+                <div class="form-group">
+                    <label for="MobileNumber">Mobile Number</label>
+                    <input type="tel" id="MobileNumber" name="MobileNumber" class="form-control" required pattern="^\d{10}$" />
+                    <div class="invalid-feedback">Enter a valid 10-digit number.</div>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" required />
+                    <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="CheckIn">Check-In Date</label>
+                    <input type="text" id="CheckIn" name="CheckIn" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-in date.</div>
+                    <p id="checkInError" class="text-danger" style="display: none;"></p>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="CheckOut">Check-Out Date</label>
+                    <input type="text" id="CheckOut" name="CheckOut" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-out date.</div>
+                    <p id="checkOutError" class="text-danger" style="display: none;"></p>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="Adults">Adults</label>
+                    <input type="number" id="Adults" name="Adults" class="form-control" min="1" required />
+                    <div class="invalid-feedback">Minimum 1 adult required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Children">Children (Optional)</label>
+                    <input type="number" id="Children" name="Children" class="form-control" min="0" />
+                </div>
+
+                <p id="guestError" class="text-danger" style="display: none;"></p>
+                <button type="submit" class="btn btn-book">Book Now</button>
+
+                <div class="mt-3 text-muted small">
+                    <span class="legend-box booked-color"></span>
+                    <span>Red dates are already booked and cannot be selected.</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const roomId = $("#RoomId").val();
+        const apiBaseUrl = "http://localhost:5217";
+        const today = new Date().toISOString().split("T")[0];
+        let bookedDates = [];
+
+        // Helper to parse date string to Date object
+        function parseDate(dateStr) {
+            const [y, m, d] = dateStr.split("-");
+            return new Date(y, m - 1, d);
+        }
+
+        // Fetch booked dates
+        $.ajax({
+            url: `${apiBaseUrl}/api/v1/BookingAPI/GetBookedDates/${roomId}`,
+            method: "GET",
+            success: function (data) {
+                bookedDates = data.result
+                    .filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d))
+                    .map(parseDate); // Convert to Date objects
+                initializePickers();
+            },
+            error: function () {
+                alert("❌ Could not fetch booked dates.");
+                initializePickers(); // Still allow date picking
+            }
+        });
+
+        let checkInPicker, checkOutPicker;
+
+        function createPicker(selector, minDate, onChangeCallback) {
+            return flatpickr(selector, {
+                dateFormat: "Y-m-d",
+                minDate: minDate,
+                disable: bookedDates,
+                disableMobile: true,
+                onChange: onChangeCallback,
+                onDayCreate: function (_, __, ___, dayElem) {
+                    const date = dayElem.dateObj;
+                    const dateStr = dayElem.dateObj.toISOString().split("T")[0];
+                    const isWeekend = date.getDay() === 0 || date.getDay() === 6; // Sunday = 0, Saturday = 6
+                    const isBooked = bookedDates.some(d => d.toISOString().split("T")[0] === dateStr);
+                    if (isBooked) {
+                        dayElem.classList.add("booked-date");
+                        dayElem.setAttribute("title", "❌ Already Booked");
+                        dayElem.addEventListener("click", () => {
+                            alert("❌ This date is already booked.");
+                        });
+                    }
+                    if (isWeekend) {
+                              dayElem.classList.add("weekend-blink");
+                             dayElem.addEventListener("click", function () {
+                             $("#availabilityMessage")
+                             .text("This is a weekend!")
+                            .css("color", "orange")
+                            .show();
+
+                             if (!dayElem.querySelector(".custom-tooltip")) {
+    const tooltip = document.createElement("span");
+    tooltip.className = "custom-tooltip";
+    tooltip.innerText = "Weekend";
+    dayElem.appendChild(tooltip);
+}
+
+      // Make parent relative for positioning
+      dayElem.style.position = "relative";
+
+
+            setTimeout(() => {
+                $("#availabilityMessage").fadeOut();
+            }, 3000);
+        });
+    }
+                }
+            });
+        }
+
+        function initializePickers() {
+            if (checkInPicker) checkInPicker.destroy();
+            if (checkOutPicker) checkOutPicker.destroy();
+
+            checkInPicker = createPicker("#CheckIn", today, function (selectedDates, dateStr) {
+                $("#checkInError").hide();
+                if (checkOutPicker) checkOutPicker.destroy();
+                checkOutPicker = createPicker("#CheckOut", dateStr, function () {
+                    $("#checkOutError").hide();
+                });
+            });
+
+            checkOutPicker = createPicker("#CheckOut", today, function () {
+                $("#checkOutError").hide();
+            });
+        }
+
+        // Booking form validation
+        $("#bookingForm").on("submit", function (e) {
+            const maxGuests = parseInt($("#MaxGuests").val());
+            const adults = parseInt($("#Adults").val()) || 0;
+            const children = parseInt($("#Children").val()) || 0;
+            const totalGuests = adults + children;
+            const checkInDate = $("#CheckIn").val();
+            const checkOutDate = $("#CheckOut").val();
+            let hasError = false;
+
+            if (bookedDates.some(d => d.toISOString().split("T")[0] === checkInDate)) {
+                $("#checkInError").text("❌ Selected check-in date is already booked.").show();
+                hasError = true;
+            }
+
+            if (bookedDates.some(d => d.toISOString().split("T")[0] === checkOutDate)) {
+                $("#checkOutError").text("❌ Selected check-out date is already booked.").show();
+                hasError = true;
+            }
+
+            if (totalGuests > maxGuests) {
+                $("#guestError").text(`⚠️ Maximum ${maxGuests} guests allowed.`).show();
+                hasError = true;
+            } else {
+                $("#guestError").hide();
+            }
+
+            if (!this.checkValidity() || hasError) {
+                e.preventDefault();
+                $(this).addClass("was-validated");
+            }
+        });
+
+        // Field validation
+        $("input").on("input blur", function () {
+            if (this.checkValidity()) {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            } else {
+                $(this).removeClass("is-valid").addClass("is-invalid");
+            }
+        });
+    });
+
+</script>
+
+<style>
+    .booking-container {
+        max-width: 700px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .flatpickr-day.booked-date {
+        background-color: #f44336 !important;
+        color: white !important;
+        cursor: not-allowed;
+        pointer-events: auto !important;
+        position: relative;
+    }
+
+    @* .flatpickr-day.booked-date:hover::after {
+        content: "❌ Already Booked";
+        position: absolute;
+        top: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        font-size: 11px;
+        padding: 3px 6px;
+        border-radius: 4px;
+        white-space: nowrap;
+        z-index: 999;
+    } *@
+
+    .btn-book {
+        width: 100%;
+        background: linear-gradient(to right, #76b852, #8DC26F);
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .legend-box {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background-color: #f44336;
+        margin-right: 5px;
+        vertical-align: middle;
+        border-radius: 3px;
+    }
+    .flatpickr-day.weekend-date {
+    background-color: #87CEFA !important; /* Sky blue */
+    color: #000 !important;
+    border-radius: 50%;
+}
+  .weekend-blink {
+    animation: blink 1.2s infinite;
+    background-color: #f0e68c !important; /* Light golden for visibility */
+    color: black !important;
+}
+
+@@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.custom-tooltip {
+  visibility: hidden;
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px 6px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%; /* Position above */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.weekend-day:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+</style> 
+
+
+
+
+
+
+
+@* @model BookingDTO
+@{
+    ViewData["Title"] = "Book a Room";
+}
+<h2 class="text-primary text-center mb-3">Book a Room</h2>
+<hr />
+
+<div class="booking-container mx-auto">
+    <form id="bookingForm" asp-action="Create" method="post" class="needs-validation" novalidate>
+        <input type="hidden" id="VillaId" name="VillaId" value="@Model.VillaId" />
+        <input type="hidden" id="RoomId" name="RoomId" value="@Model.RoomId" />
+        <input type="hidden" id="MaxGuests" name="MaxGuests" value="@Model.MaxGuests" />
+
+        <div class="row">
+            <!-- LEFT PANEL -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Villa Name</label>
+                    <input type="text" class="form-control" value="@Model.VillaName" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <input type="text" class="form-control" value="@Model.RoomName" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="FullName">Full Name</label>
+                    <input type="text" id="FullName" name="Name" class="form-control" required minlength="3" />
+                    <div class="invalid-feedback">Enter at least 3 characters.</div>
+                </div>
+                <div class="form-group">
+                    <label for="MobileNumber">Mobile Number</label>
+                    <input type="tel" id="MobileNumber" name="MobileNumber" class="form-control" required pattern="^\d{10}$" />
+                    <div class="invalid-feedback">Enter a valid 10-digit number.</div>
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" required />
+                    <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="CheckIn">Check-In Date</label>
+                    <input type="text" id="CheckIn" name="CheckIn" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-in date.</div>
+                    <p id="checkInError" class="text-danger" style="display: none;"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="CheckOut">Check-Out Date</label>
+                    <input type="text" id="CheckOut" name="CheckOut" class="form-control" required />
+                    <div class="invalid-feedback">Select a valid check-out date.</div>
+                    <p id="checkOutError" class="text-danger" style="display: none;"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="Adults">Adults</label>
+                    <input type="number" id="Adults" name="Adults" class="form-control" min="1" required />
+                    <div class="invalid-feedback">Minimum 1 adult required.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Children">Children (Optional)</label>
+                    <input type="number" id="Children" name="Children" class="form-control" min="0" />
+                </div>
+
+                <p id="guestError" class="text-danger" style="display: none;"></p>
+                <div id="availabilityMessage" class="text-info mt-2" style="display:none;"></div>
+                <button type="submit" class="btn btn-book">Book Now</button>
+
+                <div class="mt-3 text-muted small">
+                    <span class="legend-box booked-color"></span>
+                    <span>Red dates are already booked and cannot be selected.</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Scripts -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const roomId = $("#RoomId").val();
+        const apiBaseUrl = "http://localhost:5217";
+        const today = new Date().toISOString().split("T")[0];
+        let bookedDates = [];
+
+        function parseDate(dateStr) {
+            const [y, m, d] = dateStr.split("-");
+            return new Date(y, m - 1, d);
+        }
+
+        $.ajax({
+            url: `${apiBaseUrl}/api/v1/BookingAPI/GetBookedDates/${roomId}`,
+            method: "GET",
+            success: function (data) {
+                bookedDates = data.result
+                    .filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d))
+                    .map(parseDate);
+                initializePickers();
+            },
+            error: function () {
+                alert("❌ Could not fetch booked dates.");
+                initializePickers();
+            }
+        });
+
+        let checkInPicker, checkOutPicker;
+
+        function createPicker(selector, minDate, onChangeCallback) {
+            return flatpickr(selector, {
+                dateFormat: "Y-m-d",
+                minDate: minDate,
+                disable: bookedDates,
+                disableMobile: true,
+                onChange: onChangeCallback,
+                onDayCreate: function (_, __, ___, dayElem) {
+                    const date = dayElem.dateObj;
+                    const dateStr = date.toISOString().split("T")[0];
+                    const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+                    const isBooked = bookedDates.some(d => d.toISOString().split("T")[0] === dateStr);
+
+                    if (isBooked) {
+                        dayElem.classList.add("booked-date");
+                        dayElem.setAttribute("title", "❌ Already Booked");
+                        dayElem.addEventListener("click", () => {
+                            alert("❌ This date is already booked.");
+                        });
+                    }
+
+                    if (isWeekend) {
+                        dayElem.classList.add("weekend-blink");
+                        dayElem.classList.add("has-tooltip");
+                        dayElem.setAttribute("data-tooltip", "🌞 Weekend");
+
+                        dayElem.addEventListener("click", function () {
+                            $("#availabilityMessage")
+                                .text("This is a weekend!")
+                                .css("color", "orange")
+                                .show();
+                            if (!dayElem.querySelector(".custom-tooltip")) {
+                                const tooltip = document.createElement("span");
+                                tooltip.className = "custom-tooltip";
+                                tooltip.innerText = "Weekend";
+                                dayElem.appendChild(tooltip);
+                                dayElem.style.position = "relative";
+                            }
+
+                            setTimeout(() => {
+                                $("#availabilityMessage").fadeOut();
+                            }, 3000);
+                        });
+                    }
+                }
+            });
+        }
+
+        function initializePickers() {
+            if (checkInPicker) checkInPicker.destroy();
+            if (checkOutPicker) checkOutPicker.destroy();
+
+            checkInPicker = createPicker("#CheckIn", today, function (selectedDates, dateStr) {
+                $("#checkInError").hide();
+                if (checkOutPicker) checkOutPicker.destroy();
+                checkOutPicker = createPicker("#CheckOut", dateStr, function () {
+                    $("#checkOutError").hide();
+                });
+            });
+
+            checkOutPicker = createPicker("#CheckOut", today, function () {
+                $("#checkOutError").hide();
+            });
+        }
+
+        $("#bookingForm").on("submit", function (e) {
+            const maxGuests = parseInt($("#MaxGuests").val());
+            const adults = parseInt($("#Adults").val()) || 0;
+            const children = parseInt($("#Children").val()) || 0;
+            const totalGuests = adults + children;
+            const checkInDate = $("#CheckIn").val();
+            const checkOutDate = $("#CheckOut").val();
+            let hasError = false;
+
+            if (bookedDates.some(d => d.toISOString().split("T")[0] === checkInDate)) {
+                $("#checkInError").text("❌ Selected check-in date is already booked.").show();
+                hasError = true;
+            }
+
+            if (bookedDates.some(d => d.toISOString().split("T")[0] === checkOutDate)) {
+                $("#checkOutError").text("❌ Selected check-out date is already booked.").show();
+                hasError = true;
+            }
+
+            if (totalGuests > maxGuests) {
+                $("#guestError").text(`⚠️ Maximum ${maxGuests} guests allowed.`).show();
+                hasError = true;
+            } else {
+                $("#guestError").hide();
+            }
+
+            if (!this.checkValidity() || hasError) {
+                e.preventDefault();
+                $(this).addClass("was-validated");
+            }
+        });
+
+        $("input").on("input blur", function () {
+            if (this.checkValidity()) {
+                $(this).removeClass("is-invalid").addClass("is-valid");
+            } else {
+                $(this).removeClass("is-valid").addClass("is-invalid");
+            }
+        });
+    });
+</script>
+
+<style>
+    .booking-container {
+        max-width: 700px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .flatpickr-day.booked-date {
+        background-color: #f44336 !important;
+        color: white !important;
+        cursor: not-allowed;
+        pointer-events: auto !important;
+        position: relative;
+    }
+
+    .flatpickr-day.booked-date:hover::after {
+        content: "❌ Already Booked";
+        position: absolute;
+        top: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        font-size: 11px;
+        padding: 3px 6px;
+        border-radius: 4px;
+        white-space: nowrap;
+        z-index: 999;
+    }
+
+    .flatpickr-day.weekend-blink {
+        animation: blink 1.2s infinite;
+        background-color: #f0e68c !important;
+        color: black !important;
+    }
+
+    @@keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
+    .custom-tooltip {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: #fff;
+        padding: 2px 5px;
+        font-size: 10px;
+        border-radius: 3px;
+        white-space: nowrap;
+    }
+
+    .btn-book {
+        width: 100%;
+        background: linear-gradient(to right, #76b852, #8DC26F);
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+    }
+
+    .legend-box {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color: #f44336;
+        margin-right: 5px;
+        border-radius: 3px;
+    }
+</style> *@
+
+
+
+
+
+
+
+
+
+
+

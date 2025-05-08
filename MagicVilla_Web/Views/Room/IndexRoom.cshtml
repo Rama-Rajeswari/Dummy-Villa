@@ -1,0 +1,165 @@
+@* 
+@model IEnumerable<MagicVilla_Web.Models.Dto.RoomDTO>
+
+<br/>
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <h1 class="text-primary">Room List</h1>
+    </div>
+    <div class="col text-end pt-1">
+        <a asp-controller="Room" asp-action="CreateRoom" class="btn btn-outline-primary">
+            <i class="bi bi-plus-square-fill"></i> Create New Room
+        </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Room Type</th>
+                <th>Max Guests</th>
+                <th>Weekday Price</th>
+                <th>Weekend Price</th>
+                <th>Villa</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="roomTableBody">
+            @foreach (var item in Model)
+            {
+                <tr class="roomRow">
+                    <td>@item.RoomType</td>
+                    <td>@item.MaxGuests</td>
+                    <td>@item.WeekdayPrice</td>
+                    <td>@item.WeekendPrice</td>
+                    <td>@item.VillaName</td>
+                    <td>
+                        <a asp-controller="Room" asp-action="UpdateRoom" asp-route-roomId="@item.Id" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-controller="Room" asp-action="DeleteRoom" asp-route-roomId="@item.Id" class="btn btn-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between">
+        <button id="prevPage" class="btn btn-secondary" disabled>Previous</button>
+        <span id="pageInfo" class="align-self-center">Page 1</span>
+        <button id="nextPage" class="btn btn-secondary">Next</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentPage = 1;
+        const pageSize = 6;
+        const roomRows = document.querySelectorAll(".roomRow");
+
+        function showPage(page) {
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+
+            roomRows.forEach((row, index) => {
+                row.style.display = index >= start && index < end ? "table-row" : "none";
+            });
+
+            document.getElementById("pageInfo").textContent = `Page ${page}`;
+            document.getElementById("prevPage").disabled = (page === 1);
+            document.getElementById("nextPage").disabled = (end >= roomRows.length);
+        }
+
+        document.getElementById("prevPage").addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        document.getElementById("nextPage").addEventListener("click", function () {
+            if ((currentPage * pageSize) < roomRows.length) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        showPage(currentPage);
+    });
+</script> *@
+
+
+@model IPagedList<MagicVilla_Web.Models.Dto.RoomDTO>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+<br/>
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <h1 class="text-primary">Room List</h1>
+    </div>
+    <div class="col text-end pt-1">
+        <a asp-controller="Room" asp-action="CreateRoom" class="btn btn-outline-primary">
+            <i class="bi bi-plus-square-fill"></i> Create New Room
+        </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Room Type</th>
+                <th>Max Guests</th>
+                <th>Weekday Price</th>
+                <th>Weekend Price</th>
+                <th>Villa</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RoomType</td>
+                    <td>@item.MaxGuests</td>
+                    <td>@item.WeekdayPrice</td>
+                    <td>@item.WeekendPrice</td>
+                    <td>@item.VillaName</td>
+                    <td>
+                        <a asp-controller="Room" asp-action="UpdateRoom" asp-route-roomId="@item.Id" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <a asp-controller="Room" asp-action="DeleteRoom" asp-route-roomId="@item.Id" class="btn btn-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-center">
+        @Html.PagedListPager(Model, page => Url.Action("IndexRoom", new { page, pageSize = ViewBag.PageSize }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link", "custom-page-link" }
+            })
+    </div>
+
+    <!-- Page Size Input and Record Info -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+            <p class="mb-0">
+                Showing records <strong>@ViewBag.StartRecord - @ViewBag.EndRecord</strong> 
+                of <strong>@ViewBag.TotalRecords</strong>
+            </p>
+        </div>
+
+        <div>
+            <form method="get" action="@Url.Action("IndexRoom")" class="d-flex align-items-center gap-2">
+                <label for="pageSize" class="small-label">Enter Page Size:</label>
+                <input type="number" id="pageSize" name="pageSize" class="form-control" value="@ViewBag.PageSize" min="1" required>
+                <button type="submit" class="btn btn-outline-primary btn-sm">Set</button>
+            </form>
+        </div>
+    </div>
+</div>

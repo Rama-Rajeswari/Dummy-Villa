@@ -1,0 +1,183 @@
+
+@* @model MagicVilla_Web.Models.Dto.BookingResponseDTO
+
+
+
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<style>
+    h2 {
+        font-size: 24px;
+    }
+
+    .alert {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .table-container {
+        max-width: 500px; 
+        margin: auto;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 6px 8px;
+    }
+
+    .btn {
+        display: block;
+        width: fit-content;
+        margin: 10px auto;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+    
+/* Added this style */
+     .main-container { 
+         margin-top: 80px; /* Adjust this value as needed */
+     }
+
+</style>
+
+<h2 class="text-center">Booking Confirmation</h2>
+
+@if (Model != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@Model.Message</strong>
+    </div>
+
+    <div class="table-container">
+        <table class="table table-bordered">
+            <tr>
+                <th>Villa</th>
+                <td>@Model.VillaName</td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td>@Model.RoomType</td>
+            </tr>
+            <tr>
+                <th>Check-In</th>
+                <td>@Model.CheckIn.ToString("dd MMM yyyy")</td>
+            </tr>
+            <tr>
+                <th>Check-Out</th>
+                <td>@Model.CheckOut.ToString("dd MMM yyyy")</td>
+            </tr>
+            <tr>
+                <th>Cost</th>
+                <td>₹@Model.TotalCost</td>
+            </tr>
+        </table>
+    </div>
+
+    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Go Home</a>
+}
+else
+{
+    <div class="alert alert-danger text-center">
+        <p>Something went wrong. Please try again later.</p>
+    </div>
+} *@
+
+
+
+
+
+@model MagicVilla_Web.Models.Dto.BookingResponseDTO
+
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<style>
+    h2 {
+        font-size: 24px;
+    }
+
+    .alert {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .table-container {
+        max-width: 500px; 
+        margin: auto;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 6px 8px;
+    }
+
+    .btn {
+        display: block;
+        width: fit-content;
+        margin: 10px auto;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    /* Updated this style */
+    .main-container { 
+        padding-top: 60px; /* Adjust this value as needed */
+    }
+</style>
+
+<!-- Added class "main-container" here -->
+<div class="main-container">
+    <h2 class="text-center">Booking Confirmation</h2>
+
+    @if (Model != null)
+    {
+        <div class="alert alert-success text-center">
+            <strong>@Model.Message</strong>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Villa</th>
+                    <td>@Model.VillaName</td>
+                </tr>
+                <tr>
+                    <th>Room</th>
+                    <td>@Model.RoomType</td>
+                </tr>
+                <tr>
+                    <th>Check-In</th>
+                    <td>@Model.CheckIn.ToString("dd MMM yyyy")</td>
+                </tr>
+                <tr>
+                    <th>Check-Out</th>
+                    <td>@Model.CheckOut.ToString("dd MMM yyyy")</td>
+                </tr>
+                <tr>
+                    <th>Cost</th>
+                    <td>₹@Model.TotalCost</td>
+                </tr>
+            </table>
+        </div>
+
+        <a class="btn btn-primary" href="@Url.Action("Index", "Home")">Go Home</a>
+    }
+    else
+    {
+        <div class="alert alert-danger text-center">
+            <p>Something went wrong. Please try again later.</p>
+        </div>
+    }
+</div>

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_VillaAPI", "MagicVilla_VillaAPI\MagicVilla_VillaAPI.csproj", "{AAA35F06-9789-4A13-80D8-7A14D16653B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_Web", "MagicVilla_Web\MagicVilla_Web.csproj", "{496A05A9-6A4C-4311-B978-29AA485A166B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_Utility", "MagicVilla_Utility\MagicVilla_Utility.csproj", "{A261E673-22F2-4FAD-8743-EE54E619B457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicVilla_NUnit", "MagicVilla_NUnit\MagicVilla_NUnit.csproj", "{55E64D18-BC44-43D8-927E-B45217DF8CCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAA35F06-9789-4A13-80D8-7A14D16653B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAA35F06-9789-4A13-80D8-7A14D16653B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAA35F06-9789-4A13-80D8-7A14D16653B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAA35F06-9789-4A13-80D8-7A14D16653B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496A05A9-6A4C-4311-B978-29AA485A166B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496A05A9-6A4C-4311-B978-29AA485A166B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496A05A9-6A4C-4311-B978-29AA485A166B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496A05A9-6A4C-4311-B978-29AA485A166B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A261E673-22F2-4FAD-8743-EE54E619B457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A261E673-22F2-4FAD-8743-EE54E619B457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A261E673-22F2-4FAD-8743-EE54E619B457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A261E673-22F2-4FAD-8743-EE54E619B457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E64D18-BC44-43D8-927E-B45217DF8CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E64D18-BC44-43D8-927E-B45217DF8CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E64D18-BC44-43D8-927E-B45217DF8CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E64D18-BC44-43D8-927E-B45217DF8CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

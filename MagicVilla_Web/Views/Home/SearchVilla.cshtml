@@ -1,0 +1,69 @@
+<div class="container">
+    <h1>Search Villas</h1>
+    
+    
+    <div>
+        <input type="text" id="villaName" class="form-control" placeholder="Search by Villa Name" oninput="fetchResults()">
+        <input type="text" id="roomName" class="form-control" placeholder="Search by Room Name" oninput="fetchResults()">
+        <input type="text" id="destination" class="form-control" placeholder="Search by Destination" oninput="fetchResults()">
+    </div>
+
+    
+    <div id="results">
+        
+    </div>
+</div>
+
+<script>
+    async function fetchResults() {
+        
+        const villaName = document.getElementById('villaName').value;
+        const roomName = document.getElementById('roomName').value;
+        const destination = document.getElementById('destination').value;
+
+        
+        let query = `villaName=${villaName}&roomName=${roomName}&destination=${destination}`;
+
+        try {
+            
+            const response = await fetch(`/api/v1/VillaAPI/search?${query}`);
+
+            
+            if (response.ok) {
+                const data = await response.json();
+                displayResults(data.result); 
+            } else {
+                document.getElementById('results').innerHTML = 'No villas found matching your search.';
+            }
+        } catch (error) {
+            console.error('Error fetching villa data:', error);
+            document.getElementById('results').innerHTML = 'An error occurred while fetching the villas.';
+        }
+    }
+
+    function displayResults(villas) {
+        console.log('Villas:', villas);
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = ''; 
+
+        if (villas.length === 0) {
+            resultsDiv.innerHTML = 'No villas found matching your search.';
+        } else {
+            villas.forEach(villa => {
+                const villaDiv = document.createElement('div');
+                villaDiv.classList.add('villa-result');
+                villaDiv.innerHTML = `
+                    <h3>${villa.name}</h3>
+                    <p>${villa.details}</p>
+                    <p>Destination: ${villa.destination.name}</p>
+                    <img src="${villa.imageUrl}" alt="${villa.name}" class="villa-image">
+                    <h4>Rooms:</h4>
+                    <ul>
+                        ${villa.rooms.map(room => `<li>${room.roomType} - Price: $${room.weekdayPrice} (Weekday)</li>`).join('')}
+                    </ul>
+                `;
+                resultsDiv.appendChild(villaDiv);
+            });
+        }
+    }
+</script>

@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "VillaAPI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/MagicVilla_VillaAPI/bin/Debug/net6.0/MagicVilla_VillaAPI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/MagicVilla_VillaAPI",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "VillaWeb",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/MagicVilla_Web/bin/Debug/net6.0/MagicVilla_Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/MagicVilla_Web",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "VillaAPI and VillaWeb",
+            "configurations": ["VillaAPI", "VillaWeb"]
+        }
+    ]
+}

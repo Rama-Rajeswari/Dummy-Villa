@@ -1,0 +1,86 @@
+@model MagicVilla_Web.Models.Dto.RoomCreateDTO
+<form asp-action="CreateRoom">
+    <br/>
+    <div class=" container border p-3">
+        <h1 class="text-primary">Create Room</h1>
+        <hr/>
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="RoomType" class="control-label pt-2" style="font-size: 20px;">
+                    Room Type <span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="RoomType" class="form-control"/>
+                <span asp-validation-for="RoomType" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="MaxGuests" class="control-label pt-2" style="font-size: 20px;">
+                    Max Guests <span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="MaxGuests" class="form-control"/>
+                <span asp-validation-for="MaxGuests" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="GuestTypeIds" class="control-label pt-2" style="font-size: 20px;">
+                    Guest Types
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="GuestTypeIds" class="form-control" multiple></select>
+                <span asp-validation-for="GuestTypeIds" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="WeekdayPrice" class="control-label pt-2" style="font-size: 20px;">
+                    Weekday Price <span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="WeekdayPrice" class="form-control" type="number" step="0.01"/>
+                <span asp-validation-for="WeekdayPrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="WeekendPrice" class="control-label pt-2" style="font-size: 20px;">
+                    Weekend Price <span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="WeekendPrice" class="form-control" type="number" step="0.01"/>
+                <span asp-validation-for="WeekendPrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-2">
+                <label asp-for="VillaId" class="control-label pt-2" style="font-size: 20px;">
+                    Villa ID <span class="text-danger">*</span>
+                </label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="VillaId" class="form-control"/>
+                <span asp-validation-for="VillaId" class="text-danger"></span>
+            </div>
+
+            <div class="col-5 offset-2">
+                <a asp-action="IndexRoom" asp-controller="Room" class="btn-primary btn form-control">Back to List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Create" class="btn btn-success form-control"/>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"/>
+}
+
+
+
