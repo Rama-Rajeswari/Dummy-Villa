@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '9.0.x'  # Adjust if you're using a specific preview version
+          dotnet-version: '9.0.x'
 
       - name: Display .NET info (for debugging)
         run: dotnet --info
@@ -29,6 +29,9 @@ jobs:
 
       - name: Restore dependencies for MVC
         run: dotnet restore ./MagicVilla_Web/MagicVilla_Web.csproj
+
+      - name: List contents of MagicVilla_NUnit
+        run: dir ./MagicVilla_NUnit
 
       - name: Restore dependencies for NUnit
         run: dotnet restore ./MagicVilla_NUnit/MagicVilla_NUnit.csproj
@@ -41,15 +44,6 @@ jobs:
 
       - name: Run NUnit tests with detailed logging
         run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
-        
-      - name: List contents of MagicVilla_NUnit
-        run: dir ./MagicVilla_NUnit
-
-        
-      - name: Restore dependencies for NUnit
-        run: dotnet restore ./MagicVilla_NUnit/MagicVilla_NUnit.csproj
-
-
 
       - name: Deploy if tests pass
         if: success()
@@ -57,6 +51,3 @@ jobs:
           echo "Tests passed, deploying application..."
           xcopy /s /y /i .\MagicVilla_VillaAPI\bin\Release\net9.0\publish\* C:\inetpub\wwwroot\YourAPI
           xcopy /s /y /i .\MagicVilla_Web\bin\Release\net9.0\publish\* C:\inetpub\wwwroot\YourMVC
-
-
-
