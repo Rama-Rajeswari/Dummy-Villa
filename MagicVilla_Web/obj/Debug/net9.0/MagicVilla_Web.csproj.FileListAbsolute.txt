@@ -340,3 +340,4 @@ c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Web\obj\Debug\net9.0\refint\Mag
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Web\obj\Debug\net9.0\MagicVilla_Web.pdb
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Web\obj\Debug\net9.0\MagicVilla_Web.genruntimeconfig.cache
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Web\obj\Debug\net9.0\ref\MagicVilla_Web.dll
+C:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Web\obj\Debug\net9.0\MagicVilla_Web.sourcelink.json

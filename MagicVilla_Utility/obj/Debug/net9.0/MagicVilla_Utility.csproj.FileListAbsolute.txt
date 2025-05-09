@@ -31,3 +31,4 @@ c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Utility\obj\Debug\net9.0\MagicV
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Utility\obj\Debug\net9.0\refint\MagicVilla_Utility.dll
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Utility\obj\Debug\net9.0\MagicVilla_Utility.pdb
 c:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Utility\obj\Debug\net9.0\ref\MagicVilla_Utility.dll
+C:\Users\SUNRAJES\Desktop\DummyVilla1\MagicVilla_Utility\obj\Debug\net9.0\MagicVilla_Utility.sourcelink.json
