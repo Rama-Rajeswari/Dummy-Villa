@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: '9.0.x'  # Adjust if you're using a specific preview version
 
       - name: Display .NET info (for debugging)
         run: dotnet --info
@@ -46,8 +46,8 @@ jobs:
         if: success()
         run: |
           echo "Tests passed, deploying application..."
-          xcopy /s /y /i .\MagicVilla_VillaAPI\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourAPI
-          xcopy /s /y /i .\MagicVilla_Web\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourMVC
+          xcopy /s /y /i .\MagicVilla_VillaAPI\bin\Release\net9.0\publish\* C:\inetpub\wwwroot\YourAPI
+          xcopy /s /y /i .\MagicVilla_Web\bin\Release\net9.0\publish\* C:\inetpub\wwwroot\YourMVC
 
 
 
