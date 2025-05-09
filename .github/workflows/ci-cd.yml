@@ -43,7 +43,7 @@ jobs:
         run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
 
       - name: Run NUnit tests with detailed logging
-        run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit_csproj --configuration Release --logger "console;verbosity=detailed"
+        run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
 
       - name: Deploy if tests pass
         if: success()
