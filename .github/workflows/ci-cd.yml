@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          clean: true
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v2
@@ -22,11 +24,20 @@ jobs:
       - name: Display .NET info (for debugging)
         run: dotnet --info
 
-      - name: Restore dependencies
-        run: dotnet restore Dummy-Villiq.sln
+      - name: Restore dependencies for API
+        run: dotnet restore ./MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj
 
-      - name: Build solution
-        run: dotnet build Dummy-Villiq.sln --configuration Release
+      - name: Restore dependencies for MVC
+        run: dotnet restore ./MagicVilla_Web/MagicVilla_Web.csproj
+
+      - name: Restore dependencies for NUnit
+        run: dotnet restore ./MagicVilla_NUnit/MagicVilla_NUnit.csproj
+
+      - name: Build API project
+        run: dotnet build ./MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj --configuration Release
+
+      - name: Build MVC project
+        run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
 
       - name: Run NUnit tests with detailed logging
         run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
