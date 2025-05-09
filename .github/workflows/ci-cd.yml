@@ -1,0 +1,41 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build API project
+      run: dotnet build ./MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj --configuration Release
+
+    - name: Build MVC project
+      run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
+
+    - name: Run NUnit tests
+      run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release
+
+    - name: Deploy if tests pass
+      if: success()
+      run: |
+        echo "Tests passed, deploying application..."
+        # Add your deployment commands here
+        # Example: Copy files to IIS directory
+        xcopy /s /y /i .\MagicVilla_VillaAPI\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourAPI
+        xcopy /s /y /i .\MagicVilla_Web\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourMVC
+
