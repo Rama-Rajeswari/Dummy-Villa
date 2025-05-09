@@ -14,19 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup .NET
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '6.0.x'
 
+      - name: Display .NET info (for debugging)
+        run: dotnet --info
+
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore Dummy-Villiq.sln
 
-      - name: Build API project
-        run: dotnet build ./MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj --configuration Release
-
-      - name: Build MVC project
-        run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
+      - name: Build solution
+        run: dotnet build Dummy-Villiq.sln --configuration Release
 
       - name: Run NUnit tests with detailed logging
         run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
@@ -37,5 +37,6 @@ jobs:
           echo "Tests passed, deploying application..."
           xcopy /s /y /i .\MagicVilla_VillaAPI\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourAPI
           xcopy /s /y /i .\MagicVilla_Web\bin\Release\net6.0\publish\* C:\inetpub\wwwroot\YourMVC
+
 
 
