@@ -27,8 +27,9 @@ jobs:
     - name: Build MVC project
       run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
 
-    - name: Run NUnit tests
-      run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release
+    - - name: Run NUnit tests with detailed logging
+  run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
+
 
     - name: Deploy if tests pass
       if: success()
