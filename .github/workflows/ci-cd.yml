@@ -30,11 +30,11 @@ jobs:
       - name: Restore dependencies for MVC
         run: dotnet restore ./MagicVilla_Web/MagicVilla_Web.csproj
 
-      - name: List contents of MagicVilla_NUnit
-        run: dir ./MagicVilla_NUnit
+      - name: List contents of MagicVilla.NUnit
+        run: dir ./MagicVilla.NUnit
 
       - name: Restore dependencies for NUnit
-        run: dotnet restore ./MagicVilla_NUnit/MagicVilla_NUnit.csproj
+        run: dotnet restore ./MagicVilla.NUnit/MagicVilla.NUnit.csproj
 
       - name: Build API project
         run: dotnet build ./MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj --configuration Release
@@ -43,7 +43,7 @@ jobs:
         run: dotnet build ./MagicVilla_Web/MagicVilla_Web.csproj --configuration Release
 
       - name: Run NUnit tests with detailed logging
-        run: dotnet test ./MagicVilla_NUnit/MagicVilla_NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
+        run: dotnet test ./MagicVilla.NUnit/MagicVilla.NUnit.csproj --configuration Release --logger "console;verbosity=detailed"
 
       - name: Deploy if tests pass
         if: success()
