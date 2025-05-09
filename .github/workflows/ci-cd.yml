@@ -31,7 +31,7 @@ jobs:
         run: dotnet restore ./MagicVilla_Web/MagicVilla_Web.csproj
 
       - name: List contents of MagicVilla.NUnit
-        run: dir ./MagicVilla.NUnit
+        run: dir ./MagicVilla_NUnit
 
       - name: Restore dependencies for NUnit
         run: dotnet restore ./MagicVilla.NUnit/MagicVilla.NUnit.csproj
